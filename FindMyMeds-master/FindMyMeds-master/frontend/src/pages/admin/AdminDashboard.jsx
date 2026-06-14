@@ -11,7 +11,7 @@ import {
   fetchCiviliansChart,
   fetchPharmaciesChart,
   fetchAdminsChart
-} from '../../api/dashboardApi';
+} from '../../Api/dashboardApi';
 import adminClient from '../../api/adminClient';
 
 const AdminDashboard = () => {
