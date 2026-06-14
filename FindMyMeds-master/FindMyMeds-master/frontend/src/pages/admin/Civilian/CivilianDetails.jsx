@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { ChevronLeft, User, Phone, Mail, Shield, AlertTriangle, CheckCircle, Clock } from "lucide-react";
-import { fetchCivilianDetails, tempBanCivilian, permanentBanCivilian } from "../../../api/civilianAdminApi";
+import { fetchCivilianDetails, tempBanCivilian, permanentBanCivilian } from "../../../Api/civilianAdminApi";
 
 export default function CivilianDetails() {
     const { id } = useParams();
