@@ -2,8 +2,8 @@ FROM maven:3.9.6-eclipse-temurin-21 AS build
 
 WORKDIR /app
 
-COPY FindMyMeds-master/backend/pom.xml .
-COPY FindMyMeds-master/backend/src ./src
+COPY FindMyMeds-master/FindMyMeds-master/backend/pom.xml .
+COPY FindMyMeds-master/FindMyMeds-master/backend/src ./src
 
 RUN mvn clean package -DskipTests
 
