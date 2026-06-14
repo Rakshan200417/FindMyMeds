@@ -8,13 +8,10 @@ export default defineConfig({
     include: ['jspdf', 'jspdf-autotable'],
   },
   resolve: {
-    alias: {
-      '../../api': path.resolve(__dirname, 'src/API'),
-      '../../Api': path.resolve(__dirname, 'src/API'),
-      '../../../api': path.resolve(__dirname, 'src/API'),
-      '../../../Api': path.resolve(__dirname, 'src/API'),
-      '../../../../api': path.resolve(__dirname, 'src/API'),
-      '../../../../Api': path.resolve(__dirname, 'src/API'),
-    },
+    alias: [
+      { find: /^(\.\.\/)+[Aa][Pp][Ii]\//, replacement: path.resolve(__dirname, 'src/API') + '/' },
+      { find: /^(\.\.\/)+[Ss]ervice\//, replacement: path.resolve(__dirname, 'src/services') + '/' },
+      { find: /^(\.\.\/)+[Ss]ervices\//, replacement: path.resolve(__dirname, 'src/services') + '/' },
+    ],
   },
 })
