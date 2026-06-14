@@ -1,5 +1,6 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
+import path from 'path'
 
 export default defineConfig({
   plugins: [react()],
@@ -7,9 +8,13 @@ export default defineConfig({
     include: ['jspdf', 'jspdf-autotable'],
   },
   resolve: {
-    alias: [
-      { find: /^(\.\.\/)*api\//, replacement: '/src/API/' },
-    ],
-    caseSensitive: false,
+    alias: {
+      '../../api': path.resolve(__dirname, 'src/API'),
+      '../../Api': path.resolve(__dirname, 'src/API'),
+      '../../../api': path.resolve(__dirname, 'src/API'),
+      '../../../Api': path.resolve(__dirname, 'src/API'),
+      '../../../../api': path.resolve(__dirname, 'src/API'),
+      '../../../../Api': path.resolve(__dirname, 'src/API'),
+    },
   },
 })
