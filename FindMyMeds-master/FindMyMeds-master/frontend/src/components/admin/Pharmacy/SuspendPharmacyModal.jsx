@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { X, PauseCircle, AlertCircle, CheckCircle2, MailWarning } from "lucide-react";
-import { suspendPharmacy } from "../../../Service/Admin/PharmacyService";
+import { suspendPharmacy } from "../../../Service/Admin/pharmacyService";
 
 const SuspendPharmacyModal = ({ open, pharmacy, onClose, refresh }) => {
   const [reason, setReason] = useState("");
