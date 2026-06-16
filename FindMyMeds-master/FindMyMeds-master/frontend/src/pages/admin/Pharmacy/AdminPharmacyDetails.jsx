@@ -12,7 +12,7 @@ import SuspendPharmacyModal from "../../../components/admin/Pharmacy/SuspendPhar
 import RemovePharmacyModal from "../../../components/admin/Pharmacy/RemovePharmacyModal";
 
 /* Service */
-import { getPharmacyDetails } from "../../../Service/Admin/PharmacyService";
+import { getPharmacyDetails } from "../../../Service/Admin/pharmacyService";
 
 const AdminPharmacyDetails = () => {
   const { pharmacyId } = useParams();
