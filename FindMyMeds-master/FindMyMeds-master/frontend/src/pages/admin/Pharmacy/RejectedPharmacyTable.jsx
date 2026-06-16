@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FileX2, Search, MapPin, Calendar, ChevronRight, ArrowLeft, RefreshCw, ShieldAlert } from 'lucide-react';
-import { getPharmacies } from "../../../Service/Admin/PharmacyService";
+import { getPharmacies } from "../../../Service/Admin/pharmacyService";
 
 const RejectedPharmacyTable = () => {
   const navigate = useNavigate();
