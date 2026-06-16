@@ -6,25 +6,53 @@ import fs from 'fs'
 function caseInsensitiveResolver() {
   return {
     name: 'case-insensitive-resolver',
+    enforce: 'pre',
     resolveId(source, importer) {
-      if (!importer || source.startsWith('.') === false) return null
+      if (!importer) return null
+      if (!source.startsWith('.')) return null
+
       const importerDir = path.dirname(importer)
-      const resolved = path.resolve(importerDir, source)
-      const dir = path.dirname(resolved)
-      const base = path.basename(resolved)
+      const resolvedBase = path.resolve(importerDir, source)
+      const dir = path.dirname(resolvedBase)
+      const base = path.basename(resolvedBase)
 
-      if (!fs.existsSync(dir)) return null
-      if (fs.existsSync(resolved) || fs.existsSync(resolved + '.js') || fs.existsSync(resolved + '.jsx')) return null
+      const exts = ['', '.js', '.jsx', '.ts', '.tsx']
 
-      const files = fs.readdirSync(dir)
-      const match = files.find(f => f.toLowerCase() === base.toLowerCase() ||
-        f.toLowerCase() === (base + '.js').toLowerCase() ||
-        f.toLowerCase() === (base + '.jsx').toLowerCase())
-
-      if (match) {
-        return path.join(dir, match)
+      // First check if exact case already works
+      for (const ext of exts) {
+        if (fs.existsSync(resolvedBase + ext)) return null
       }
-      return null
+
+      // Walk the path segment by segment, fixing case as we go
+      const parts = path.relative(process.cwd(), resolvedBase).split(path.sep)
+      let current = process.cwd()
+
+      for (let i = 0; i < parts.length; i++) {
+        const part = parts[i]
+        const isLast = i === parts.length - 1
+
+        if (!fs.existsSync(current)) return null
+        const entries = fs.readdirSync(current)
+
+        let match = entries.find(e => e === part)
+
+        if (!match && isLast) {
+          // try with extensions
+          for (const ext of exts) {
+            match = entries.find(e => e.toLowerCase() === (part + ext).toLowerCase())
+            if (match) break
+          }
+        }
+
+        if (!match) {
+          match = entries.find(e => e.toLowerCase() === part.toLowerCase())
+        }
+
+        if (!match) return null
+        current = path.join(current, match)
+      }
+
+      return current
     }
   }
 }
