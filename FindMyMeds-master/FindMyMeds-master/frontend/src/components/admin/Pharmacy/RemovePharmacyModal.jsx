@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { X, Trash2, AlertTriangle, CheckCircle2, SendHorizontal, MailWarning } from "lucide-react";
-import { removePharmacy } from "../../../Service/Admin/PharmacyService";
+import { removePharmacy } from "../../../Service/Admin/pharmacyService";
 
 const RemovePharmacyModal = ({ open, pharmacy, onClose }) => {
   const [reason, setReason] = useState("");
